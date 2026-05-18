@@ -1,0 +1,3 @@
+display_name: X Search
+short_description: Search X through Hermes x_search.
+default_prompt: Search X for the latest relevant posts and summarize the result with citations.

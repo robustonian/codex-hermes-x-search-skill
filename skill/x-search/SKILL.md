@@ -23,15 +23,18 @@ or sources outside X.
 
 Call the bundled wrapper with `terminal`:
 
+Use `python3` when available. If the environment only exposes Python 3 as
+`python`, use `python` instead.
+
 ```bash
-python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" \
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" \
   --query "latest reactions to Grok on X"
 ```
 
 Use handle filters when helpful:
 
 ```bash
-python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" \
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" \
   --query "latest product announcement" \
   --allowed-handle xai
 ```
@@ -39,7 +42,7 @@ python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" 
 Use date filters in `YYYY-MM-DD` format:
 
 ```bash
-python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" \
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" \
   --query "discussion about OpenAI Codex" \
   --from-date 2026-05-01 \
   --to-date 2026-05-18
@@ -60,7 +63,7 @@ python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" 
 Availability check:
 
 ```bash
-python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" --check
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" --check
 ```
 
 Successful searches return JSON with:
@@ -71,3 +74,6 @@ Successful searches return JSON with:
 - optional `citations` and `inline_citations`
 
 If `success` is false, report the `error` field plainly.
+If the error mentions `NameResolutionError` or `Failed to resolve 'api.x.ai'`,
+report that Codex network/DNS access is blocked or unavailable in the current
+execution environment.

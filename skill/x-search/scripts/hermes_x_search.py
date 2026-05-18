@@ -90,21 +90,35 @@ def main() -> int:
         _get_x_search_model,
         _get_x_search_retries,
         _get_x_search_timeout_seconds,
-        check_x_search_requirements,
         x_search_tool,
     )
+    from tools.xai_http import resolve_xai_http_credentials
 
     if args.check:
         entry = registry.get_entry("x_search")
+        credential_source = ""
+        requirements_ok = False
+        try:
+            creds = resolve_xai_http_credentials()
+            if str(creds.get("api_key") or "").strip():
+                requirements_ok = True
+                credential_source = str(creds.get("provider") or "")
+        except Exception:
+            requirements_ok = False
+            credential_source = ""
         _print_json(
             {
                 "success": True,
                 "registered": bool(entry),
                 "toolset": getattr(entry, "toolset", None),
-                "requirements_ok": check_x_search_requirements(),
+                "requirements_ok": requirements_ok,
+                "credential_source": credential_source,
                 "model": _get_x_search_model(),
                 "timeout_seconds": _get_x_search_timeout_seconds(),
                 "retries": _get_x_search_retries(),
+                "hermes_home": str(hermes_home),
+                "hermes_agent": str(hermes_agent),
+                "python_executable": sys.executable,
             }
         )
         return 0

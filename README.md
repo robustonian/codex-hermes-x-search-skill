@@ -126,7 +126,7 @@ python3 skill/x-search/scripts/hermes_x_search.py --check
   "model": "grok-4.3",
   "timeout_seconds": 180,
   "retries": 2,
-  "hermes_home": "/home/user/.hermes"
+  "hermes_home": "~/.hermes"
 }
 ```
 

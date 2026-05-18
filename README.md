@@ -1,10 +1,14 @@
-# Codex x-search Skill
+# Codex Hermes x_search Skill
 
-CodexからHermes Agentの既存`x_search`ツールを呼び出すためのローカルスキル配布リポジトリです。
+CodexからHermes Agentの既存`x_search`ツールを呼び出すためのローカルスキルです。
 
 Codexに新しいネイティブツールを追加するものではありません。Codexの`terminal`経由で、ローカルにあるHermes Agentの`x_search_tool()`を実行し、X上の投稿・スレッド・反応を検索します。
 
-![Codex x-search Skill architecture](assets/architecture.png)
+![Codex Hermes x_search Skill architecture](assets/architecture.png)
+
+このリポジトリは、Hermes Agentで`x_search`を設定済みの環境をCodexから再利用するための補助ツールです。Hermes Agent側のセットアップ背景やX Premiumでの認証手順については、次の記事も参考になります。
+
+- [XプレミアムプランでGrokとx_searchツールを使う](https://zenn.dev/robustonian/articles/x_premium_grok_search)
 
 ## できること
 
@@ -29,7 +33,7 @@ Codexに新しいネイティブツールを追加するものではありませ
 このリポジトリは、人間向けの説明とエージェント向けスキル本体を分けています。
 
 ```text
-codex-x-search-skill/
+codex-hermes-x-search-skill/
 ├── README.md
 ├── assets/
 │   └── architecture.png
@@ -82,8 +86,8 @@ codex-x-search-skill/
 このリポジトリを任意の場所にcloneします。
 
 ```bash
-git clone <PRIVATE_REPO_URL> codex-x-search-skill
-cd codex-x-search-skill
+git clone https://github.com/robustonian/codex-hermes-x-search-skill.git codex-hermes-x-search-skill
+cd codex-hermes-x-search-skill
 ```
 
 スキル本体だけをCodexのskillsディレクトリへ配置します。
@@ -96,7 +100,7 @@ cp -R skill/x-search ~/.codex/skills/x-search
 既存ディレクトリを更新する場合:
 
 ```bash
-cd codex-x-search-skill
+cd codex-hermes-x-search-skill
 git pull
 rm -rf ~/.codex/skills/x-search
 cp -R skill/x-search ~/.codex/skills/x-search
@@ -254,6 +258,22 @@ Hermes側でxAI認証が使えない状態です。
 
 配置先が`~/.codex/skills/x-search`になっているか確認し、Codexを再起動してください。
 
+## 関連記事
+
+Hermes Agent側で`x_search`を使えるようにするまでの実体験ベースの手順は、以下の記事にまとまっています。
+
+- [XプレミアムプランでGrokとx_searchツールを使う](https://zenn.dev/robustonian/articles/x_premium_grok_search)
+
+記事では、Hermes Agentの導入、`hermes tools`での`x_search`有効化、xAI OAuth認証、リモート環境でのSSHポートフォワード、Grokモデル選択、`x_search`でできること・できないことが説明されています。
+
+このスキルは、その記事で整えたHermes Agent環境をCodexから呼び出すための薄いbridgeです。
+
 ## ライセンス
 
-このリポジトリのライセンス方針に従ってください。
+このリポジトリの独自コードとドキュメントはMIT Licenseです。詳細は[LICENSE](LICENSE)を参照してください。
+
+Hermes Agent本体はこのリポジトリには含めていません。実行時にローカルの`~/.hermes/hermes-agent`を参照します。Hermes Agentは、確認時点ではNous ResearchのMIT Licenseで配布されています。公開する場合でも、このリポジトリがHermes Agent本体のコードを再配布していない限り、通常はHermes Agent側の著作権表示を同梱する必要は薄い構成です。
+
+ただし、Hermes Agentのコードをこのリポジトリへコピーしたり、改変版を同梱したりする場合は、Hermes Agent側のLICENSEを保持してください。また、xAI/Xの利用条件や認証情報の扱いは別問題なので、APIキー、OAuthトークン、`~/.hermes/auth.json`、`.env`などは絶対にコミットしないでください。
+
+公開するかどうかについては、現在の構成なら公開しても技術的・ライセンス的なリスクは低いです。一方で、個人の導入手順や認証運用に強く依存する補助スクリプトなので、まずはprivate repositoryのまま運用し、必要なら後で公開用にREADMEをさらに一般化するのが無難です。

@@ -8,7 +8,8 @@ description: Search X posts through Hermes x_search.
 Use this skill when the user asks to search X, Twitter, posts, threads,
 handles, reactions, or current discussion on X. This does not add a native
 Codex tool. It provides a reliable wrapper around the local Hermes Agent
-`x_search` implementation by running `hermes -z --toolsets x_search`.
+`x_search` setup by reading Hermes-managed credentials from `~/.hermes` and
+calling xAI's Responses API directly.
 
 ## When to Use
 
@@ -31,8 +32,8 @@ python3 "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py"
   --query "latest reactions to Grok on X"
 ```
 
-The wrapper expects the installed `hermes` CLI to be on `PATH`. If needed, pass
-`--hermes-command /path/to/hermes`.
+The wrapper does not require the `hermes` CLI on `PATH`. If needed, pass
+`--hermes-home /path/to/.hermes`.
 
 Use handle filters when helpful:
 
@@ -57,7 +58,7 @@ python3 "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py"
 2. Convert the user's request into a concise X search query.
 3. Add `--allowed-handle` for specific accounts, without `@`.
 4. Do not combine allowed and excluded handles.
-5. Read the JSON returned by the Hermes one-shot command.
+5. Read the returned JSON.
 6. Summarize the `answer` field and include useful citation URLs from
    `citations` or `inline_citations` when present.
 

@@ -24,14 +24,14 @@ or sources outside X.
 Call the bundled wrapper with `terminal`:
 
 ```bash
-python /home/gosrum/.codex/skills/x-search/scripts/hermes_x_search.py \
+python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" \
   --query "latest reactions to Grok on X"
 ```
 
 Use handle filters when helpful:
 
 ```bash
-python /home/gosrum/.codex/skills/x-search/scripts/hermes_x_search.py \
+python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" \
   --query "latest product announcement" \
   --allowed-handle xai
 ```
@@ -39,7 +39,7 @@ python /home/gosrum/.codex/skills/x-search/scripts/hermes_x_search.py \
 Use date filters in `YYYY-MM-DD` format:
 
 ```bash
-python /home/gosrum/.codex/skills/x-search/scripts/hermes_x_search.py \
+python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" \
   --query "discussion about OpenAI Codex" \
   --from-date 2026-05-01 \
   --to-date 2026-05-18
@@ -60,7 +60,7 @@ python /home/gosrum/.codex/skills/x-search/scripts/hermes_x_search.py \
 Availability check:
 
 ```bash
-python /home/gosrum/.codex/skills/x-search/scripts/hermes_x_search.py --check
+python "${CODEX_HOME:-$HOME/.codex}/skills/x-search/scripts/hermes_x_search.py" --check
 ```
 
 Successful searches return JSON with:

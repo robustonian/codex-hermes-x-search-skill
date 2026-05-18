@@ -1,6 +1,6 @@
 ---
 name: x-search
-description: Search X posts through Hermes x_search.
+description: Search X posts using Hermes credentials.
 ---
 
 # X Search Skill
